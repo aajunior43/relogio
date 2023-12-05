@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+        :root {
+            --background-color: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
+            --font-family: 'Orbitron', sans-serif;
+            --text-color: #00F5A0;
+            --text-shadow: 2px 2px 4px #00b3fd;
+        }
+
+        body {
+            background: var(--background-color);
+            font-family: var(--font-family);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        #clock, #date {
+            text-shadow: var(--text-shadow);
+            transition: text-shadow 0.5s;
+        }
+
+        #clock {
+            font-size: 80px;
+        }
+
+        #date {
+            font-size: 40px;
+        }
+
+        #author {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            #clock {
+                font-size: 50px;
+            }
+            #date {
+                font-size: 25px;
+            }
+            #author {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="clock"></div>
+    <div id="date"></div>
+    <div id="author">Aleksandro Alves</div>
+    <script>
+        function updateTime() {
+            let date = new Date();
+            let hours = date.getHours().toString().padStart(2, '0');
+            let minutes = date.getMinutes().toString().padStart(2, '0');
+            let seconds = date.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').textContent = hours + ':' + minutes + ':' + seconds;
+
+            let day = date.getDate().toString().padStart(2, '0');
+            let month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
+            let year = date.getFullYear();
+            document.getElementById('date').textContent = day + '/' + month + '/' + year;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
