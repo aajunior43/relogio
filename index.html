@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-
         :root {
-            --background-color: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
-            --font-family: 'Orbitron', sans-serif;
-            --text-color: #00F5A0;
-            --text-shadow: 2px 2px 4px #00b3fd;
+            --background-color: #000000;
+            --font-family: 'Press Start 2P', cursive;
+            --text-color: #0f0;
+            --text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0, 0 0 80px #0f0;
         }
 
         body {
@@ -21,36 +20,38 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            transition: background 0.5s, color 0.5s;
-        }
-
-        #clock, #date {
-            text-shadow: var(--text-shadow);
-            transition: text-shadow 0.5s;
+            padding: 0;
+            transition: all 0.5s ease-in-out;
         }
 
         #clock {
-            font-size: 80px;
+            font-size: 48px;
+            text-shadow: var(--text-shadow);
         }
 
         #date {
-            font-size: 40px;
+            font-size: 24px;
+            text-shadow: var(--text-shadow);
+            margin-top: 20px;
         }
 
         #author {
-            font-size: 20px;
-            margin-top: 20px;
+            font-size: 16px;
+            text-shadow: var(--text-shadow);
+            margin-top: 40px;
         }
 
         @media (max-width: 600px) {
             #clock {
-                font-size: 50px;
+                font-size: 32px;
             }
+
             #date {
-                font-size: 25px;
+                font-size: 18px;
             }
+
             #author {
-                font-size: 15px;
+                font-size: 14px;
             }
         }
     </style>
@@ -59,19 +60,21 @@
     <div id="clock"></div>
     <div id="date"></div>
     <div id="author">Aleksandro Alves</div>
+
     <script>
         function updateTime() {
-            let date = new Date();
-            let hours = date.getHours().toString().padStart(2, '0');
-            let minutes = date.getMinutes().toString().padStart(2, '0');
-            let seconds = date.getSeconds().toString().padStart(2, '0');
-            document.getElementById('clock').textContent = hours + ':' + minutes + ':' + seconds;
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
 
-            let day = date.getDate().toString().padStart(2, '0');
-            let month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
-            let year = date.getFullYear();
-            document.getElementById('date').textContent = day + '/' + month + '/' + year;
+            const day = now.getDate().toString().padStart(2, '0');
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const year = now.getFullYear();
+            document.getElementById('date').textContent = `${day}/${month}/${year}`;
         }
+
         setInterval(updateTime, 1000);
         updateTime();
     </script>
